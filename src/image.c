@@ -242,7 +242,6 @@ image_data* classified_image (image_data* data, int threshold_classify){
 //Output: nothing
 //Function: Write image and print or not the results
 void write_image(image_data* data, bool show_results){
-    extern int printStartClassify;
     char* name = malloc(sizeof(char) * 35);
     for(int i = 0; i < 35; i++){
         name[i] = '\0';
@@ -256,9 +255,8 @@ void write_image(image_data* data, bool show_results){
     //stbi_write_jpg(strcat(name, "_laplacian.jpg"), data->width, data->height, 1, data->laplacian_image, 100);
     if(show_results){
         
-        if(printStartClassify==1){
+        if(strcmp(data->image_name, "imagen_1") == 0){
             printf("| image    | nearly black |\n|----------|--------------|\n");
-            printStartClassify=0;
         }
         if (data->nearly_black==1){
             printf("| %s |     yes      |\n",data->image_name);

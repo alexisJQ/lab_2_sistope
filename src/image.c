@@ -272,3 +272,7 @@ void write_image(image_data* data, bool show_results){
     return;
 
 }
+
+void write_image_2(int width, int height, char str[100], uint8_t* data){
+    stbi_write_jpg(strcat(str, "_output.jpg"), width, height, 1, data, 100);
+}

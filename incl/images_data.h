@@ -2,12 +2,6 @@
 
     #define IMAGES_DATA_H
 
-    typedef struct RGB{
-        uint8_t R;
-        uint8_t G;
-        uint8_t B;
-    }RGB;
-
 
     typedef struct image_data{
         int width;

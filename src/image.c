@@ -28,42 +28,22 @@ image_data* RGB_read_image(image_data* data){
     free(name);
     return data;
 }
-
-//Input: Struct with image data 
-//Output:new Struct image updated with gray filter (Y=R∗0.3 +G∗0.59 +B∗0.11)
-//Function: Apply Y=R∗0.3 +G∗0.59 +B∗0.11 on pixels and transform RGB on one channel
-image_data* convert_gray_scale(image_data* data){
+/*
+Input: 
+    > int R: intensity of the red color in the pixel
+    > int G: intensity of the green color in the pixel
+    > int B: intensity of the blue color in the pixel
+Output:
+    > int sum: grayscale pixel value
+Function: Apply Y=R∗0.3 +G∗0.59 +B∗0.11 on pixels and transform RGB on one channel (gray scale)
+*/
+int convert_gray_scale(int R, int G, int B){
         
-    int aux_channels=0; //RGB
-    int case1,case2,case3,total;
-    data->gray_image = malloc((data->width * data->height) * sizeof(uint8_t));
-    int j=0;
-
-    // loop through the image array
-    for(int i = 0; i < data->width * data->height * data->bpp; i++ ){
-        
-        //case pixel R
-        if(aux_channels == 0){
-            case1 = (data->principal_image[i] * 3) / 10;
-            aux_channels += 1;
-        }
-
-        //case pixel G
-        else if (aux_channels == 1){
-            case2 = (data->principal_image[i] * 59) / 100;
-            aux_channels += 1;
-                
-        }
-        //case pixel B
-        else{
-            case3 = (data->principal_image[i] * 11) / 100;
-            total = case1 + case2 + case3;
-            data->gray_image[j] = total;
-            aux_channels = 0;
-            j += 1;    
-        }
-    }
-    return data;
+    int sum = 0;
+    sum += R*0.3;
+    sum += G*0.59;
+    sum += B*0.11;
+    return sum;
 }
 
 //Input: Struct with a image data and int Umbral (depending on threshold) 

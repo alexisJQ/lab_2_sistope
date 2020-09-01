@@ -1,14 +1,23 @@
 .SILENT:
-all: clean bin/main bin/main2 bin/main3
+all: clean main main2 main3 main4 main5 main7
 
-bin/main: obj/image.o obj/images_data.o obj/support_for_main.o
+main: obj/image.o obj/images_data.o obj/support_for_main.o
 	gcc src/main.c obj/image.o obj/images_data.o obj/support_for_main.o -o main -lm
 
-bin/main2: obj/image.o obj/images_data.o obj/support_for_main.o
+main2: obj/image.o obj/images_data.o obj/support_for_main.o
 	gcc src/main2.c obj/image.o obj/images_data.o obj/support_for_main.o -o main2 -lm
 
-bin/main3: obj/image.o obj/images_data.o obj/support_for_main.o
+main3: obj/image.o obj/images_data.o obj/support_for_main.o
 	gcc src/main3.c obj/image.o obj/images_data.o obj/support_for_main.o -o main3 -lm
+
+main4: obj/image.o obj/images_data.o obj/support_for_main.o
+	gcc src/main4.c obj/image.o obj/images_data.o obj/support_for_main.o -o main4 -lm
+
+main5: obj/image.o obj/images_data.o obj/support_for_main.o
+	gcc src/main5.c obj/image.o obj/images_data.o obj/support_for_main.o -o main5 -lm
+
+main7: obj/image.o obj/images_data.o obj/support_for_main.o
+	gcc src/main7.c obj/image.o obj/images_data.o obj/support_for_main.o -o main7 -lm
 
 obj/image.o: 
 	gcc -c -Iinclude src/image.c -o obj/image.o

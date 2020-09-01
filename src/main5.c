@@ -22,14 +22,12 @@ int main(int argc, char const *argv[])
     char mask_file_name[20];
     int show_results = 0;
     
-    // data of the image
+    // data of the image 
     char image_name[100];
     char str[100];
     int width = 0;
     int height = 0;
-    int bpp = 0;
     int aux = 0;
-    uint8_t sum = 0;
 
     // get global values
     read(STDIN_FILENO, str, 100);
@@ -44,46 +42,35 @@ int main(int argc, char const *argv[])
 	if (pid == 0){//child section
 		close(piped[WRITE]);
 		dup2(piped[READ], STDIN_FILENO);
-
 		execl("main7", "main7", NULL);
 	}
 	else{//father section
 		close(piped[READ]);
 		write(piped[WRITE], str, 100); //send global values
 	}
-    
-    for(int i = 1; i <= numb_images; i ++){
-        
+
+
+    for (int i = 1; i <= numb_images; i++){
+
         read(STDIN_FILENO, image_name, 100); // get name of the image
         write(piped[WRITE], image_name, 100); // send name of the image
-        
+
         read(STDIN_FILENO, str, 100); // get dimension of the image
-        sscanf(str, "%d %d %d", &width, &height, &bpp);
-        sprintf(str, "%d %d", width, height);
+        sscanf(str, "%d %d", &width, &height);
         write(piped[WRITE], str, 100); //send dimension of the image
 
-        int pos = 0;
-
-        // get gray scale of the image
-        for (int i = 0; i < width * height * bpp; i++){
+        for (int pos = 0; pos < width * height; pos ++){
             read(STDIN_FILENO, str, 100); // get pixel
             sscanf(str, "%d", &aux);
-            if (i % 3 == 0){
-                sum += aux * 3 / 10;
+            if (aux > threshold_binarize){
+                aux = 255;
             }
-            else if (i % 3 == 1){
-                sum += aux * 59 / 100;
+            else{
+                aux = 0;
             }
-            else if (i % 3 == 2){
-                sum += aux * 11 / 100;
-                sprintf(str, "%u", sum);
-                write(piped[WRITE], str, 100); //send pixel
-                sum = 0;
-                pos += 1;
-            }
-
-		}
-        
+            sprintf(str, "%d", aux);
+            write(piped[WRITE], str, 100); // send pixel
+        }
     }
     exit(0);
 }

@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
 		sprintf(str, "%d %d %d", data->width, data->height, data->bpp);
 		write(piped[WRITE], str, 100);
 
+		// send pixel one by one to the next process
 		for (int i = 0; i < data->width * data->height * data->bpp; i++){
 			sprintf(str, "%u", data->principal_image[i]);
 			write(piped[WRITE], str, 100); // send pixel

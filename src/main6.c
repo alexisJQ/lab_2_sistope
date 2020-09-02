@@ -32,7 +32,8 @@ int main(int argc, char const *argv[])
     // get global values
     read(STDIN_FILENO, str, 100);
     sscanf(str, "%s %d %d %d %d", mask_file_name,  &threshold_binarize, &threshold_classify, &numb_images, &show_results);
-   
+fprintf(stderr, "Error en planta de Centro: %d\n", show_results);
+    
     int piped[2];
 	pipe(piped);
 
@@ -76,7 +77,7 @@ int main(int argc, char const *argv[])
             write(piped[WRITE], str, 100);
         }
         else{
-            sprintf(str, "%d", 1);
+            sprintf(str, "%d", 0);
             write(piped[WRITE], str, 100);
         }
     }

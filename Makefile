@@ -1,5 +1,5 @@
 .SILENT:
-all: clean main main2 main3 main4 main5 main7
+all: clean main main2 main3 main4 main5 main6 main7
 
 main: obj/image.o obj/images_data.o obj/support_for_main.o
 	gcc src/main.c obj/image.o obj/images_data.o obj/support_for_main.o -o main -lm
@@ -15,6 +15,9 @@ main4: obj/image.o obj/images_data.o obj/support_for_main.o
 
 main5: obj/image.o obj/images_data.o obj/support_for_main.o
 	gcc src/main5.c obj/image.o obj/images_data.o obj/support_for_main.o -o main5 -lm
+
+main6: obj/image.o obj/images_data.o obj/support_for_main.o
+	gcc src/main6.c obj/image.o obj/images_data.o obj/support_for_main.o -o main6 -lm
 
 main7: obj/image.o obj/images_data.o obj/support_for_main.o
 	gcc src/main7.c obj/image.o obj/images_data.o obj/support_for_main.o -o main7 -lm

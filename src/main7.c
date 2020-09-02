@@ -16,6 +16,7 @@
 int main(int argc, char const *argv[])
 {
     // data from command
+    char namePri[100]="imagen_1_output.jpg";
     int numb_images = 1;
     int threshold_binarize = 100;
     int threshold_classify = 100;
@@ -33,8 +34,7 @@ int main(int argc, char const *argv[])
     // get global values
     read(STDIN_FILENO, str, 100);
     sscanf(str, "%s %d %d %d %d", mask_file_name,  &threshold_binarize, &threshold_classify, &numb_images, &show_results);
-
-    for (int i = 1; i <= numb_images; i++){
+      for (int i = 1; i <= numb_images; i++){
         read(STDIN_FILENO, image_name, 100); // get name of the image
         
         read(STDIN_FILENO, str, 100); // get dimension of the image
@@ -49,6 +49,21 @@ int main(int argc, char const *argv[])
         }
 
         write_image_2(width, height, image_name, image);
+        if(show_results==1){
+            read(STDIN_FILENO, str, 100); // get pixel
+            sscanf(str, "%d", &aux);
+            if(strcmp(namePri,image_name)==0){
+               printf("\n| image    | nearly black |\n|----------|--------------|\n");
+                
+            }
+            if(aux==1){
+                    printf("| %s |     yes      |\n",image_name);
+                }
+                else{
+                    printf("| %s |     no       |\n",image_name);
+                }
+
+        }
         free(image);
     }
     exit(0);

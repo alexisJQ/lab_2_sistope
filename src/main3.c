@@ -44,8 +44,7 @@ int main(int argc, char const *argv[])
 	if (pid == 0){//child section
 		close(piped[WRITE]);
 		dup2(piped[READ], STDIN_FILENO);
-
-		execl("main7", "main7", NULL);
+		execl("main5", "main5", NULL);
 	}
 	else{//father section
 		close(piped[READ]);

@@ -35,6 +35,4 @@ obj/images_data.o:
 
 clean:
 	rm -f obj/*.o
-	rm -f *output.jpg
 	rm -f main*
-	

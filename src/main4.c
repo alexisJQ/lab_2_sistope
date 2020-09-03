@@ -163,5 +163,6 @@ int main(int argc, char const *argv[])
     }
     free(image);
     }
+    waitpid(pid, NULL, 0);
     exit(0);
 }

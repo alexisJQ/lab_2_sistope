@@ -72,5 +72,6 @@ int main(int argc, char const *argv[])
             write(piped[WRITE], str, 100); // send pixel
         }
     }
+    waitpid(pid, NULL, 0);
     exit(0);
 }

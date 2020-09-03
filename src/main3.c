@@ -84,5 +84,6 @@ int main(int argc, char const *argv[])
 		}
         
     }
+    waitpid(pid, NULL, 0);
     exit(0);
 }

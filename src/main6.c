@@ -32,7 +32,6 @@ int main(int argc, char const *argv[])
     // get global values
     read(STDIN_FILENO, str, 100);
     sscanf(str, "%s %d %d %d %d", mask_file_name,  &threshold_binarize, &threshold_classify, &numb_images, &show_results);
-fprintf(stderr, "Error en planta de Centro: %d\n", show_results);
     
     int piped[2];
 	pipe(piped);
@@ -59,6 +58,7 @@ fprintf(stderr, "Error en planta de Centro: %d\n", show_results);
         read(STDIN_FILENO, str, 100); // get dimension of the image
         sscanf(str, "%d %d", &width, &height);
         write(piped[WRITE], str, 100); //send dimension of the image
+        
         int cantidad=0;
         int total=0;
         for (int pos = 0; pos < width * height; pos ++){
@@ -81,5 +81,6 @@ fprintf(stderr, "Error en planta de Centro: %d\n", show_results);
             write(piped[WRITE], str, 100);
         }
     }
+    waitpid(pid, NULL, 0);
     exit(0);
 }
